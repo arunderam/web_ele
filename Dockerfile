@@ -10,7 +10,7 @@ RUN apk add --no-cache \
     curl \
     && rm -rf /var/cache/apk/*
 
-# Create custom nginx configuration for better performance
+# Create custom nginx configuration for better performance and debugging
 COPY <<EOF /etc/nginx/conf.d/default.conf
 server {
     listen 80;
@@ -18,22 +18,28 @@ server {
     root /usr/share/nginx/html;
     index index.html;
 
+    # Enable error logging for debugging
+    error_log /var/log/nginx/error.log debug;
+    access_log /var/log/nginx/access.log;
+
     # Security headers
     add_header X-Frame-Options "SAMEORIGIN" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-XSS-Protection "1; mode=block" always;
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Content-Security-Policy "default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://use.fontawesome.com https://cdn.jsdelivr.net https://ajax.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com https://cdn.jsdelivr.net;" always;
 
     # Gzip compression
     gzip on;
     gzip_vary on;
     gzip_min_length 1024;
-    gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json;
+    gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json image/svg+xml;
 
     # Cache static assets
-    location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {
+    location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2|ttf|eot)$ {
         expires 1y;
         add_header Cache-Control "public, immutable";
+        add_header Access-Control-Allow-Origin "*";
     }
 
     # Handle HTML files
@@ -51,6 +57,13 @@ server {
     location /health {
         access_log off;
         return 200 "healthy\n";
+        add_header Content-Type text/plain;
+    }
+
+    # Debug endpoint to check file structure
+    location /debug {
+        access_log off;
+        return 200 "Files loaded successfully\n";
         add_header Content-Type text/plain;
     }
 }

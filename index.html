@@ -74,21 +74,20 @@
             <!-- Carousel Start -->
             <div class="carousel-header">
                 <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+                    <!-- Fixed: Only one indicator for one slide -->
                     <ol class="carousel-indicators">
                         <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"></li>
-                        <li data-bs-target="#carouselId" data-bs-slide-to="1"></li>
-                        <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img src="img/smartwall.jpg" class="img-fluid w-100" alt="Image">
+                            <img src="img/smartwall.jpg" class="img-fluid w-100" alt="Smart Wall Technology" onerror="this.style.display='none'">
                             <div class="carousel-caption-1">
                                 <div class="carousel-caption-1-content" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;" style="letter-spacing: 3px;">Welcome to Elementure Private Limited</h4>
+                                    <h4 class="text-white text-uppercase fw-bold mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s; letter-spacing: 3px;">Welcome to Elementure Private Limited</h4>
                                     <h1 class="display-2 text-capitalize text-white mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.3s" style="animation-delay: 1.3s;">Smart & Secure Homes – Where Innovation Meets Peace of Mind</h1>
-                                    <p class="mb-5 fs-5 text-white fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.5s" style="animation-delay: 1.5s;">Elementure. offers cutting-edge products and solutions for smart home automation. Starting with e. as the most promising brand under Elementure Pvt. Ltd. 
+                                    <p class="mb-5 fs-5 text-white fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.5s" style="animation-delay: 1.5s;">Elementure. offers cutting-edge products and solutions for smart home automation. Starting with e. as the most promising brand under Elementure Pvt. Ltd.
                                     </p>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -666,18 +665,37 @@
         <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
 
         
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    
+    <!-- JavaScript Libraries with error handling -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+            onerror="console.error('Failed to load jQuery from CDN')"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+            onerror="console.error('Failed to load Bootstrap from CDN')"></script>
+    <script src="lib/wow/wow.min.js"
+            onerror="console.error('Failed to load WOW.js')"></script>
+    <script src="lib/easing/easing.min.js"
+            onerror="console.error('Failed to load Easing.js')"></script>
+    <script src="lib/waypoints/waypoints.min.js"
+            onerror="console.error('Failed to load Waypoints.js')"></script>
+    <script src="lib/counterup/counterup.min.js"
+            onerror="console.error('Failed to load CounterUp.js')"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"
+            onerror="console.error('Failed to load Owl Carousel')"></script>
+
+    <!-- Error handling script -->
+    <script>
+        // Check if critical libraries loaded
+        window.addEventListener('load', function() {
+            if (typeof jQuery === 'undefined') {
+                console.error('jQuery failed to load - some features may not work');
+            }
+            if (typeof bootstrap === 'undefined') {
+                console.error('Bootstrap failed to load - styling may be affected');
+            }
+        });
+    </script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js" onerror="console.error('Failed to load main.js')"></script>
     </body>
 
 </html>
