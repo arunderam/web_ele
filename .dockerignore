@@ -1,0 +1,37 @@
+# Version control
+.git
+.gitignore
+
+# Documentation
+README.md
+READ-ME.txt
+LICENSE.txt
+
+# Development files
+scss/
+*.scss
+
+# System files
+Thumbs.db
+.DS_Store
+*.tmp
+*.temp
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Docker files (avoid recursive copying)
+Dockerfile
+.dockerignore
+
+# Build artifacts
+node_modules/
+dist/
+build/
